@@ -9,13 +9,28 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onLanguage:typescript",
+    "onLanguage:typescriptreact"
+  ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "pretty-typescript-errors-plus.helloWorld",
-        "title": "Hello World"
+        "command": "pretty-typescript-errors-plus.setOpenAIBaseUrl",
+        "title": "Pretty TypeScript Errors Plus: Set OpenAI Compatible Base URL"
+      },
+      {
+        "command": "pretty-typescript-errors-plus.setOpenAIApiKey",
+        "title": "Pretty TypeScript Errors Plus: Set OpenAI Compatible API Key"
+      },
+      {
+        "command": "pretty-typescript-errors-plus.clearOpenAICredentials",
+        "title": "Pretty TypeScript Errors Plus: Clear OpenAI Credentials"
+      },
+      {
+        "command": "pretty-typescript-errors-plus.setOpenAIModel",
+        "title": "Pretty TypeScript Errors Plus: Set OpenAI Model"
       }
     ]
   },
@@ -37,5 +52,9 @@
     "typescript": "^5.7.3",
     "@vscode/test-cli": "^0.0.10",
     "@vscode/test-electron": "^2.4.1"
+  },
+  "dependencies": {
+    "@ai-sdk/openai": "^1.1.11",
+    "ai": "^4.1.40"
   }
 }

@@ -1,10 +1,10 @@
 import * as vscode from "vscode";
-import { fetchDataFromJsonPlaceholder } from "../services/apiService";
+import { getErrorSummary } from "../services/apiService";
 import { hasValidCredentials } from "../services/credentialsService";
 
 export const createHoverProvider = (context: vscode.ExtensionContext) =>
   vscode.languages.registerHoverProvider(["typescript", "typescriptreact"], {
-    provideHover: async (document, position, token) => {
+    provideHover: async (document, position) => {
       if (!hasValidCredentials(context)) {
         return null;
       }
@@ -17,19 +17,24 @@ export const createHoverProvider = (context: vscode.ExtensionContext) =>
       });
 
       if (diagnostic) {
-        const jsonData = await fetchDataFromJsonPlaceholder();
+        const errorSummary = await getErrorSummary({
+          error: diagnostic.message,
+          errorCode: diagnostic.code?.toString() || "",
+          context,
+        });
 
-        if (jsonData) {
+        if (errorSummary) {
           const message = new vscode.MarkdownString();
 
           message.isTrusted = true;
           message.supportHtml = true;
 
-          message.appendMarkdown("<br>");
-          message.appendMarkdown("**JSON Placeholder Data:**\n```json\n");
-          message.appendMarkdown(JSON.stringify(jsonData, null, 2));
-          message.appendMarkdown("\n```\n\n");
-          message.appendMarkdown(`**Original Error:** ${diagnostic.message}\n`);
+          message.appendMarkdown(`### TypeScript Error Explanation\n\n`);
+          message.appendMarkdown(`${errorSummary.errorExplanation}\n\n`);
+          message.appendMarkdown(`### How to Fix\n\n`);
+          message.appendMarkdown(
+            errorSummary.fixExplanation.map((fix) => `- ${fix}`).join("\n")
+          );
 
           return new vscode.Hover(message, diagnostic.range);
         }

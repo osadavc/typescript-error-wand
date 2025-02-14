@@ -1,15 +1,42 @@
-export const fetchDataFromJsonPlaceholder = async () => {
-  try {
-    const response = await fetch(
-      `https://jsonplaceholder.typicode.com/posts/${Math.floor(
-        Math.random() * 100
-      )}`
-    );
+import { generateObject } from "ai";
+import { getCredentials } from "./credentialsService";
+import { openai } from "../lib/ai";
+import {
+  summarizeTypeScriptError,
+  summarizeTypeScriptErrorSchema,
+  summarizeTypeScriptErrorUserPrompt,
+} from "../lib/prompts";
+import * as vscode from "vscode";
 
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("Failed to fetch data:", error);
-    return null;
-  }
+export const getErrorSummary = async ({
+  error,
+  errorCode,
+  context,
+}: {
+  error: string;
+  errorCode: string;
+  context: vscode.ExtensionContext;
+}) => {
+  const { apiKey, baseUrl, model } = getCredentials(context);
+  console.log("call being made");
+
+  const result = await generateObject({
+    model: openai({
+      baseUrl,
+      apiKey,
+    })(model),
+    schema: summarizeTypeScriptErrorSchema,
+    messages: [
+      {
+        role: "system",
+        content: summarizeTypeScriptError(),
+      },
+      {
+        role: "user",
+        content: summarizeTypeScriptErrorUserPrompt({ error, errorCode }),
+      },
+    ],
+  });
+
+  return result.object;
 };

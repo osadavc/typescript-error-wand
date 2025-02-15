@@ -17,22 +17,31 @@
   "contributes": {
     "commands": [
       {
-        "command": "pretty-typescript-errors-plus.setOpenAIBaseUrl",
-        "title": "Pretty TypeScript Errors Plus: Set OpenAI Compatible Base URL"
-      },
-      {
         "command": "pretty-typescript-errors-plus.setOpenAIApiKey",
         "title": "Pretty TypeScript Errors Plus: Set OpenAI Compatible API Key"
       },
       {
         "command": "pretty-typescript-errors-plus.clearOpenAICredentials",
         "title": "Pretty TypeScript Errors Plus: Clear OpenAI Credentials"
-      },
-      {
-        "command": "pretty-typescript-errors-plus.setOpenAIModel",
-        "title": "Pretty TypeScript Errors Plus: Set OpenAI Model"
       }
-    ]
+    ],
+    "configuration": {
+      "title": "Pretty TypeScript Errors Plus",
+      "properties": {
+        "prettyTypeScriptErrorsPlus.openai.baseUrl": {
+          "type": "string",
+          "default": "https://api.openai.com/v1",
+          "description": "OpenAI Base URL or compatible API base URL",
+          "scope": "application"
+        },
+        "prettyTypeScriptErrorsPlus.openai.model": {
+          "type": "string",
+          "default": "gpt-4o-mini",
+          "description": "OpenAI model to use for error explanations",
+          "scope": "application"
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",

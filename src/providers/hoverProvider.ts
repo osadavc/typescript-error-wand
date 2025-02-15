@@ -30,8 +30,9 @@ export const createHoverProvider = (context: vscode.ExtensionContext) =>
           message.supportHtml = true;
 
           message.appendMarkdown(`### TypeScript Error Explanation\n\n`);
-          message.appendMarkdown(`${errorSummary.errorExplanation}\n\n`);
+          message.appendMarkdown(`- ${errorSummary.errorExplanation}\n\n`);
           message.appendMarkdown(`### How to Fix\n\n`);
+
           message.appendMarkdown(
             errorSummary.fixExplanation.map((fix) => `- ${fix}`).join("\n")
           );

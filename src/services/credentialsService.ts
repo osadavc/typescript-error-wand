@@ -1,6 +1,7 @@
 import * as vscode from "vscode";
 
 export const DEFAULT_BASE_URL = "https://api.openai.com/v1";
+export const DEFAULT_MODEL = "gpt-4o-mini";
 
 export const checkAndPromptForCredentials = (
   context: vscode.ExtensionContext
@@ -23,12 +24,17 @@ export const checkAndPromptForCredentials = (
   }
 };
 
-export const getCredentials = (context: vscode.ExtensionContext) => ({
-  baseUrl: (context.globalState.get("openai.baseUrl") ||
-    DEFAULT_BASE_URL) as string,
-  apiKey: context.globalState.get("openai.apiKey") as string,
-  model: (context.globalState.get("openai.model") || "gpt-4o-mini") as string,
-});
+export const getCredentials = (context: vscode.ExtensionContext) => {
+  const config = vscode.workspace.getConfiguration(
+    "prettyTypeScriptErrorsPlus.openai"
+  );
+
+  return {
+    baseUrl: config.get<string>("baseUrl") || DEFAULT_BASE_URL,
+    apiKey: context.globalState.get<string>("openai.apiKey"),
+    model: config.get<string>("model") || DEFAULT_MODEL,
+  };
+};
 
 export const hasValidCredentials = (
   context: vscode.ExtensionContext

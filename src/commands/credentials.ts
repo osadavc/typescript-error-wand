@@ -6,53 +6,35 @@ import { getCredentials } from "../services/credentialsService";
 export const registerCredentialCommands = (
   context: vscode.ExtensionContext
 ) => {
-  const setBaseUrlCommand = vscode.commands.registerCommand(
-    "pretty-typescript-errors-plus.setOpenAIBaseUrl",
-    async () => {
-      const url = await vscode.window.showInputBox({
-        prompt: "Enter OpenAI compatible API base URL",
-        placeHolder: "https://api.openai.com/v1",
-        validateInput: (value) => {
-          try {
-            new URL(value);
-            return null;
-          } catch {
-            return "Please enter a valid URL";
-          }
-        },
-      });
-
-      if (url) {
-        await context.globalState.update("openai.baseUrl", url);
-        vscode.window.showInformationMessage(
-          "OpenAI base URL has been updated"
-        );
-      }
-    }
-  );
-
   const setApiKeyCommand = vscode.commands.registerCommand(
     "pretty-typescript-errors-plus.setOpenAIApiKey",
     async () => {
+      const { apiKey: savedAPIKey } = getCredentials(context);
+
       const apiKey = await vscode.window.showInputBox({
         prompt: "Enter OpenAI compatible API Key",
         password: true,
+        value: savedAPIKey || undefined,
         validateInput: async (value) => {
           if (value.length === 0) {
             return "API key cannot be empty";
           }
 
-          const { baseUrl } = getCredentials(context);
+          const { baseUrl, model } = getCredentials(context);
 
-          const result = await generateText({
-            model: openai({
-              baseUrl,
-              apiKey: value,
-            })("gpt-4o-mini"),
-            prompt: "Respond with 'success' if the API key is valid",
-          });
+          try {
+            const result = await generateText({
+              model: openai({
+                baseUrl,
+                apiKey: value,
+              })(model),
+              prompt: "Respond with 'success' if the API key is valid",
+            });
 
-          return result.usage.completionTokens > 0 ? null : "Invalid API key";
+            return result.usage.completionTokens > 0 ? null : "Invalid API key";
+          } catch (error) {
+            return "Invalid API key";
+          }
         },
       });
 
@@ -66,50 +48,29 @@ export const registerCredentialCommands = (
   const clearCredentialsCommand = vscode.commands.registerCommand(
     "pretty-typescript-errors-plus.clearOpenAICredentials",
     async () => {
-      await context.globalState.update("openai.baseUrl", undefined);
-      await context.globalState.update("openai.apiKey", undefined);
+      const config = vscode.workspace.getConfiguration(
+        "prettyTypeScriptErrorsPlus.openai"
+      );
+      await config.update(
+        "baseUrl",
+        undefined,
+        vscode.ConfigurationTarget.Global
+      );
+      await config.update(
+        "apiKey",
+        undefined,
+        vscode.ConfigurationTarget.Global
+      );
+      await config.update(
+        "model",
+        undefined,
+        vscode.ConfigurationTarget.Global
+      );
       vscode.window.showInformationMessage(
         "OpenAI credentials have been cleared"
       );
     }
   );
 
-  const setModelCommand = vscode.commands.registerCommand(
-    "pretty-typescript-errors-plus.setOpenAIModel",
-    async () => {
-      const model = await vscode.window.showInputBox({
-        prompt: "Enter model name",
-        placeHolder: "gpt-4o-mini",
-        validateInput: async (value) => {
-          const { baseUrl, apiKey } = getCredentials(context);
-
-          if (!apiKey) {
-            return "Please set OpenAI API key first";
-          }
-
-          const result = await generateText({
-            model: openai({
-              baseUrl,
-              apiKey,
-            })(value),
-            prompt: "Respond with 'success' if the model is valid",
-          });
-
-          return result.usage.completionTokens > 0 ? null : "Invalid model";
-        },
-      });
-
-      if (model) {
-        await context.globalState.update("openai.model", model);
-        vscode.window.showInformationMessage("OpenAI model has been updated");
-      }
-    }
-  );
-
-  return [
-    setBaseUrlCommand,
-    setApiKeyCommand,
-    clearCredentialsCommand,
-    setModelCommand,
-  ];
+  return [setApiKeyCommand, clearCredentialsCommand];
 };

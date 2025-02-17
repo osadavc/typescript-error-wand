@@ -1,71 +1,64 @@
-# pretty-typescript-errors-plus README
+# Pretty TypeScript Errors Plus 🪄
 
-This is the README for your extension "pretty-typescript-errors-plus". After writing up a brief description, we recommend including the following sections.
+A VS Code extension that enhances TypeScript error messages with AI-powered explanations and solutions. Get clear, human-friendly explanations for complex TypeScript errors right in your editor.
+
+![Pretty TypeScript Errors Plus](./assets/explanation.png)
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
-
-For example if there is an image subfolder under your extension project workspace:
-
-\!\[feature X\]\(images/feature-x.png\)
-
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+- 🤖 **AI-Powered Error Explanations**: Hover over TypeScript errors to get clear, detailed explanations of what went wrong
+- 🛠️ **Fix Suggestions**: Each error comes with practical suggestions on how to fix the issue
+- 🎯 **TypeScript & TSX Support**: Works with both TypeScript (.ts) and TypeScript React (.tsx) files
+- 🔒 **Secure**: Uses your own API key for all AI operations
+- 🔄 **Flexible AI Provider Support**: Compatible with OpenAI and any OpenAI-compatible API endpoints (like Groq)
 
 ## Requirements
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+- VS Code version 1.60.0 or higher
+- An API key from OpenAI or any OpenAI-compatible provider (Groq recommended with LLAMA models)
+
+## Setup
+
+1. Install the extension from the VS Code marketplace
+2. Configure your AI credentials:
+   - Open the command palette (Cmd/Ctrl + Shift + P)
+   - Search for "Pretty TypeScript Errors: Set Credentials"
+   - Enter your API key when prompted
+   - (Optional) Set a custom base URL if using an alternative provider like Groq
 
 ## Extension Settings
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
 This extension contributes the following settings:
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+- `prettyTypeScriptErrorsPlus.model`: The AI model to use for error explanations (supports OpenAI models and LLAMA models via Groq)
+- `prettyTypeScriptErrorsPlus.baseUrl`: Custom API base URL (use this to switch to Groq or other OpenAI-compatible providers)
+
+## How It Works
+
+1. When you hover over a TypeScript error in your code, the extension captures the error message and code
+2. It sends this information to OpenAI's API to generate a clear explanation and potential fixes
+3. The response is displayed in a hover card with:
+   - A clear explanation of what caused the error
+   - Step-by-step suggestions on how to fix it
+
+## Privacy & Security
+
+- Your code is never stored or logged
+- API calls are made using your personal API key
+- All processing happens on your machine and OpenAI's servers
 
 ## Known Issues
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+Please report any issues on our GitHub repository.
 
-## Release Notes
+## Contributing
 
-Users appreciate release notes as you update your extension.
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-### 1.0.0
+## License
 
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
+This extension is licensed under the MIT License.
 
 ---
 
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+**Enjoy coding with clearer TypeScript errors!** 🚀

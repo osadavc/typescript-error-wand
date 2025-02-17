@@ -18,7 +18,10 @@ export const getErrorSummary = async ({
   context: vscode.ExtensionContext;
 }) => {
   const { apiKey, baseUrl, model } = getCredentials(context);
-  console.log("call being made");
+
+  if (!apiKey) {
+    return null;
+  }
 
   const result = await generateObject({
     model: openai({

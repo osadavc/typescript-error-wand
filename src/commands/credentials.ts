@@ -7,7 +7,7 @@ export const registerCredentialCommands = (
   context: vscode.ExtensionContext
 ) => {
   const setApiKeyCommand = vscode.commands.registerCommand(
-    "pretty-typescript-errors-plus.setOpenAIApiKey",
+    "typescript-error-wand.setOpenAIApiKey",
     async () => {
       const { apiKey: savedAPIKey } = getCredentials(context);
 
@@ -46,10 +46,10 @@ export const registerCredentialCommands = (
   );
 
   const clearCredentialsCommand = vscode.commands.registerCommand(
-    "pretty-typescript-errors-plus.clearOpenAICredentials",
+    "typescript-error-wand.clearOpenAICredentials",
     async () => {
       const config = vscode.workspace.getConfiguration(
-        "prettyTypeScriptErrorsPlus.openai"
+        "typescriptErrorWand.openai"
       );
       await config.update(
         "baseUrl",

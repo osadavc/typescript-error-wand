@@ -1,11 +1,11 @@
 {
-  "name": "pretty-typescript-errors-plus",
-  "displayName": "Pretty TypeScript Errors Plus",
+  "name": "typescript-error-wand",
+  "displayName": "TypeScript Error Wand",
   "description": "Make TypeScript errors prettier and more dissectible with AI inside VSCode",
   "publisher": "OsadaVidath",
   "repository": {
     "type": "git",
-    "url": "https://github.com/osadavc/pretty-typescript-errors-plus"
+    "url": "https://github.com/osadavc/typescript-error-wand"
   },
   "version": "0.0.1",
   "engines": {
@@ -22,24 +22,24 @@
   "contributes": {
     "commands": [
       {
-        "command": "pretty-typescript-errors-plus.setOpenAIApiKey",
-        "title": "Pretty TypeScript Errors Plus: Set OpenAI Compatible API Key"
+        "command": "typescript-error-wand.setOpenAIApiKey",
+        "title": "TypeScript Error Wand: Set OpenAI Compatible API Key"
       },
       {
-        "command": "pretty-typescript-errors-plus.clearOpenAICredentials",
-        "title": "Pretty TypeScript Errors Plus: Clear OpenAI Credentials"
+        "command": "typescript-error-wand.clearOpenAICredentials",
+        "title": "TypeScript Error Wand: Clear OpenAI Credentials"
       }
     ],
     "configuration": {
-      "title": "Pretty TypeScript Errors Plus",
+      "title": "TypeScript Error Wand",
       "properties": {
-        "prettyTypeScriptErrorsPlus.openai.baseUrl": {
+        "typescriptErrorWand.openai.baseUrl": {
           "type": "string",
           "default": "https://api.openai.com/v1",
           "description": "OpenAI Base URL or compatible API base URL",
           "scope": "application"
         },
-        "prettyTypeScriptErrorsPlus.openai.model": {
+        "typescriptErrorWand.openai.model": {
           "type": "string",
           "default": "gpt-4o-mini",
           "description": "OpenAI model to use for error explanations",

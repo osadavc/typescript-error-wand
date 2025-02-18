@@ -17,7 +17,7 @@ export const checkAndPromptForCredentials = (
       .then((selection) => {
         if (selection === "Set API Key") {
           vscode.commands.executeCommand(
-            "pretty-typescript-errors-plus.setOpenAIApiKey"
+            "typescript-error-wand.setOpenAIApiKey"
           );
         }
       });
@@ -26,7 +26,7 @@ export const checkAndPromptForCredentials = (
 
 export const getCredentials = (context: vscode.ExtensionContext) => {
   const config = vscode.workspace.getConfiguration(
-    "prettyTypeScriptErrorsPlus.openai"
+    "typescriptErrorWand.openai"
   );
 
   return {

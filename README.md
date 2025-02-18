@@ -1,8 +1,8 @@
-# Pretty TypeScript Errors Plus 🪄
+# TypeScript Error Wand 🪄
 
 A VS Code extension that enhances TypeScript error messages with AI-powered explanations and solutions. Get clear, human-friendly explanations for complex TypeScript errors right in your editor.
 
-![Pretty TypeScript Errors Plus](./assets/explanation.png)
+![TypeScript Error Wand](./assets/explanation.png)
 
 ## Features
 
@@ -22,7 +22,7 @@ A VS Code extension that enhances TypeScript error messages with AI-powered expl
 1. Install the extension from the VS Code marketplace
 2. Configure your AI credentials:
    - Open the command palette (Cmd/Ctrl + Shift + P)
-   - Search for "Pretty TypeScript Errors: Set Credentials"
+   - Search for "TypeScript Error Wand: Set OpenAI Compatible API Key"
    - Enter your API key when prompted
    - (Optional) Set a custom base URL if using an alternative provider like Groq
 
@@ -30,8 +30,8 @@ A VS Code extension that enhances TypeScript error messages with AI-powered expl
 
 This extension contributes the following settings:
 
-- `prettyTypeScriptErrorsPlus.model`: The AI model to use for error explanations (supports OpenAI models and LLAMA models via Groq)
-- `prettyTypeScriptErrorsPlus.baseUrl`: Custom API base URL (use this to switch to Groq or other OpenAI-compatible providers)
+- `typescriptErrorWand.openai.model`: The AI model to use for error explanations (supports OpenAI models and LLAMA models via Groq)
+- `typescriptErrorWand.openai.baseUrl`: Custom API base URL (use this to switch to Groq or other OpenAI-compatible providers)
 
 ## How It Works
 

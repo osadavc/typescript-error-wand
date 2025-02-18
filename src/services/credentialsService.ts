@@ -17,7 +17,7 @@ export const checkAndPromptForCredentials = (
       .then((selection) => {
         if (selection === "Set API Key") {
           vscode.commands.executeCommand(
-            "typescript-error-wand.setOpenAIApiKey"
+            "typescript-error-wand.set-openai-api-key"
           );
         }
       });
@@ -26,12 +26,14 @@ export const checkAndPromptForCredentials = (
 
 export const getCredentials = (context: vscode.ExtensionContext) => {
   const config = vscode.workspace.getConfiguration(
-    "typescriptErrorWand.openai"
+    "typescript-error-wand.openai"
   );
 
   return {
     baseUrl: config.get<string>("baseUrl") || DEFAULT_BASE_URL,
-    apiKey: context.globalState.get<string>("openai.apiKey"),
+    apiKey: context.globalState.get<string>(
+      "typescript-error-wand.openai.apiKey"
+    ),
     model: config.get<string>("model") || DEFAULT_MODEL,
   };
 };

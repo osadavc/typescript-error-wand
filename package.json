@@ -7,6 +7,7 @@
     "type": "git",
     "url": "https://github.com/osadavc/typescript-error-wand"
   },
+  "icon": "assets/icon.png",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.97.0"
@@ -22,24 +23,24 @@
   "contributes": {
     "commands": [
       {
-        "command": "typescript-error-wand.setOpenAIApiKey",
+        "command": "typescript-error-wand.set-openai-api-key",
         "title": "TypeScript Error Wand: Set OpenAI Compatible API Key"
       },
       {
-        "command": "typescript-error-wand.clearOpenAICredentials",
+        "command": "typescript-error-wand.clear-openai-credentials",
         "title": "TypeScript Error Wand: Clear OpenAI Credentials"
       }
     ],
     "configuration": {
       "title": "TypeScript Error Wand",
       "properties": {
-        "typescriptErrorWand.openai.baseUrl": {
+        "typescript-error-wand.openai.baseUrl": {
           "type": "string",
           "default": "https://api.openai.com/v1",
           "description": "OpenAI Base URL or compatible API base URL",
           "scope": "application"
         },
-        "typescriptErrorWand.openai.model": {
+        "typescript-error-wand.openai.model": {
           "type": "string",
           "default": "gpt-4o-mini",
           "description": "OpenAI model to use for error explanations",

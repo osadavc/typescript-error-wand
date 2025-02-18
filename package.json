@@ -10,7 +10,7 @@
   "icon": "assets/logo.png",
   "version": "0.2.0",
   "engines": {
-    "vscode": "^1.97.0"
+    "vscode": "^1.95.2"
   },
   "categories": [
     "Other"

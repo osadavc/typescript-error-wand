@@ -7,7 +7,7 @@
     "type": "git",
     "url": "https://github.com/osadavc/typescript-error-wand"
   },
-  "icon": "assets/icon.png",
+  "icon": "assets/logo.png",
   "version": "0.1.0",
   "engines": {
     "vscode": "^1.97.0"

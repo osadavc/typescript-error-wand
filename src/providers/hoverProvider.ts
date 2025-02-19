@@ -43,7 +43,7 @@ export const createHoverProvider = (context: vscode.ExtensionContext) =>
           // Try VS Code Language Model first
           const [model] = await vscode.lm.selectChatModels({
             vendor: "copilot",
-            family: "gpt-4o",
+            family: "gpt-4o-mini",
           });
 
           let errorSummary;

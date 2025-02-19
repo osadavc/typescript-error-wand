@@ -4,7 +4,9 @@ import { createHoverProvider } from "./providers/hoverProvider";
 import { checkAndPromptForCredentials } from "./services/credentialsService";
 
 export const activate = (context: vscode.ExtensionContext) => {
-  checkAndPromptForCredentials(context);
+  setTimeout(() => {
+    checkAndPromptForCredentials(context);
+  }, 8000);
 
   const credentialCommands = registerCredentialCommands(context);
 

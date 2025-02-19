@@ -9,43 +9,53 @@ A VS Code extension that enhances TypeScript error messages with AI-powered expl
 - 🤖 **AI-Powered Error Explanations**: Hover over TypeScript errors to get clear, detailed explanations of what went wrong
 - 🛠️ **Fix Suggestions**: Each error comes with practical suggestions on how to fix the issue
 - 🎯 **TypeScript & TSX Support**: Works with both TypeScript (.ts) and TypeScript React (.tsx) files
-- 🔒 **Secure**: Uses your own API key for all AI operations
-- 🔄 **Flexible AI Provider Support**: Compatible with OpenAI and any OpenAI-compatible API endpoints (like Groq)
+- 🔄 **Smart AI Provider Selection**:
+  - Uses GitHub Copilot if installed (free or paid subscription)
+  - Falls back to custom AI models if Copilot isn't available
+- 🔒 **Secure**: Uses your existing GitHub Copilot authentication or custom API key for fallback
 
 ## Requirements
 
 - VS Code version 1.60.0 or higher
-- An API key from OpenAI or any OpenAI-compatible provider (Groq recommended with LLAMA models)
+- GitHub Copilot extension (recommended) OR
+- An API key from OpenAI or any OpenAI-compatible provider for fallback
 
 ## Setup
 
 1. Install the extension from the VS Code marketplace
-2. Configure your AI credentials:
+2. Primary Setup (Recommended):
+   - Install GitHub Copilot extension
+   - Sign in to GitHub Copilot
+   - The extension will automatically use Copilot for error explanations
+3. Fallback Setup (Optional):
    - Open the command palette (Cmd/Ctrl + Shift + P)
    - Search for "TypeScript Error Wand: Set OpenAI Compatible API Key"
    - Enter your API key when prompted
-   - (Optional) Set a custom base URL if using an alternative provider like Groq
+   - (Optional) Set a custom base URL if using an alternative provider
 
 ## Extension Settings
 
 This extension contributes the following settings:
 
-- `typescriptErrorWand.openai.model`: The AI model to use for error explanations (supports OpenAI models and LLAMA models via Groq)
-- `typescriptErrorWand.openai.baseUrl`: Custom API base URL (use this to switch to Groq or other OpenAI-compatible providers)
+- `typescriptErrorWand.preferCopilot`: Toggle whether to prefer GitHub Copilot over custom AI providers (default: true)
+- `typescriptErrorWand.openai.model`: The fallback AI model to use when Copilot is unavailable
+- `typescriptErrorWand.openai.baseUrl`: Custom API base URL for fallback provider
 
 ## How It Works
 
 1. When you hover over a TypeScript error in your code, the extension captures the error message and code
-2. It sends this information to OpenAI's API to generate a clear explanation and potential fixes
-3. The response is displayed in a hover card with:
+2. If GitHub Copilot is available, it uses Copilot's API to generate explanations
+3. If Copilot isn't available, it falls back to the configured custom AI provider
+4. The response is displayed in a hover card with:
    - A clear explanation of what caused the error
    - Step-by-step suggestions on how to fix it
 
 ## Privacy & Security
 
 - Your code is never stored or logged
-- API calls are made using your personal API key
-- All processing happens on your machine and OpenAI's servers
+- Uses GitHub Copilot's secure authentication when available
+- Fallback API calls use your personal API key
+- All processing happens on your machine and the respective AI provider's servers
 
 ## Known Issues
 
